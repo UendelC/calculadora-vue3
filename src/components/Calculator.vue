@@ -20,7 +20,11 @@ const handleKeyClicked = (key: { value: string, type: string }) => {
                 return;
             }
 
-            const operations = {
+            interface OperationsSymbToValue {
+                [key: string]: string;
+            }
+
+            const operations: OperationsSymbToValue = {
                 '+': '+',
                 '-': '-',
                 'x': '*',

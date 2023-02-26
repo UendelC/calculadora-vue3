@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-interface KeyTypes {
-    regular: string;
-    operator: string;
-    equal: string;
-    'clear-back': string;
-    'sign': string;
-}
-
 const props = defineProps({
     value: {
         type: String,
@@ -19,6 +11,10 @@ const props = defineProps({
         required: true
     }
 });
+
+interface KeyTypes {
+    [key: string]: string;
+}
 
 
 const computedBackground = computed(() => {
