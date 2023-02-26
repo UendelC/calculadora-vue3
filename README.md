@@ -6,7 +6,7 @@ Disponível em: https://calculadora-0ztz.onrender.com/
 
 Calculadora feita com Vue 3 e Vite no desafio da @rocketseat #boraCodar
 
-(Design)[https://www.figma.com/community/file/1202607074523509182]
+[Design](https://www.figma.com/community/file/1202607074523509182)
 
 
 
