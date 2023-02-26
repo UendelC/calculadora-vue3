@@ -1,0 +1,77 @@
+<script setup lang="ts">
+import Visor from "./Visor.vue";
+import Keyboard from "./Keyboard.vue";
+import { ref } from "vue";
+
+let result = ref('0');
+let operation = ref([] as string[]);
+
+const handleKeyClicked = (key: { value: string, type: string }) => {
+    switch (key.type) {
+        case 'regular':
+            if (operation.value.length >= 20) {
+                return;
+            }
+
+            operation.value.push(key.value);
+            break;
+        case 'operator':
+            if (operation.value.length >= 20) {
+                return;
+            }
+
+            const operations = {
+                '+': '+',
+                '-': '-',
+                'x': '*',
+                '÷': '/'
+            };
+
+            operation.value.push(operations[key.value]);
+            break;
+        case 'equal':
+            try {
+                result.value = eval(operation.value.join('')).toString().slice(0, 10);
+            } catch(e) {
+                result.value = 'Err';
+            }
+            break;
+        case 'clear-back':
+            operation.value.pop();
+            break;
+        case 'sign':
+            if (operation.value[0] === '-') {
+                operation.value = operation.value.slice(1);
+            } else {
+                operation.value.unshift('-');
+            }
+            break;
+        case 'clear':
+            operation.value = [];
+            result.value = '0';
+            break;
+    }
+}
+</script>
+
+<template>
+    <div class="calc-body">
+        <visor :operation="operation.join('')" :result="result" />
+        <keyboard @key-clicked="handleKeyClicked"/>
+    </div>
+</template>
+
+<style scoped>
+.calc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    width: 356px;
+    height: 566px;
+    background-color: #2d2a37;
+    border-radius: 48px;
+    padding: 54px 32px 32px 32px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 188px 52px rgba(0, 0, 0, 0.01), 0px 120px 48px rgba(0, 0, 0, 0.04), 0px 68px 41px rgba(0, 0, 0, 0.15), 0px 30px 30px rgba(0, 0, 0, 0.26), 0px 8px 17px rgba(0, 0, 0, 0.29), inset 0px 6px 8px rgba(255, 255, 255, 0.1), inset 0px -4px 5px rgba(0, 0, 0, 0.22);
+}
+
+</style>
