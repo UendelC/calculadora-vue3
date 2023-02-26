@@ -1,4 +1,4 @@
-# calculator
+# Calculator
 
 ![Imagem contendo a calculadora desenvolvida neste repositório](./src/assets/calculadora.png)
 
